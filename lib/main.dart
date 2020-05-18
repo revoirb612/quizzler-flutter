@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'question.dart';
+import 'quiz_brain.dart';
+
+QuizBrain quizBrain = QuizBrain();
 
 void main() => runApp(Quizzler());
 
@@ -27,47 +31,6 @@ class QuizPage extends StatefulWidget {
 class _QuizPageState extends State<QuizPage> {
 
   List<Icon> judge = [];
-  List<String> quiz = [
-    'You can lead a cow down stairs but not up stairs.',
-    'Approximately one quarter of human bones are in the feet.',
-    'A slug\'s blood is green.',
-    'You can lead a cow down stairs but not up stairs.',
-    'Approximately one quarter of human bones are in the feet.',
-    'A slug\'s blood is green.',
-    'You can lead a cow down stairs but not up stairs.',
-    'Approximately one quarter of human bones are in the feet.',
-    'A slug\'s blood is green.',
-    'You can lead a cow down stairs but not up stairs.',
-    'Approximately one quarter of human bones are in the feet.',
-    'A slug\'s blood is green.',
-    'You can lead a cow down stairs but not up stairs.',
-    'Approximately one quarter of human bones are in the feet.',
-    'A slug\'s blood is green.',
-    'You can lead a cow down stairs but not up stairs.',
-    'Approximately one quarter of human bones are in the feet.',
-    'A slug\'s blood is green.',
-  ];
-  List<bool> answer = [
-    false,
-    true,
-    true,
-    false,
-    true,
-    true,
-    false,
-    true,
-    true,
-    false,
-    true,
-    true,
-    false,
-    true,
-    true,
-    false,
-    true,
-    true,
-  ];
-  int quizNumber = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +44,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                quiz[quizNumber],
+                quizBrain.getQuestionText(),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 25.0,
@@ -105,14 +68,8 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
               onPressed: () {
-                bool correctAnswer = answer[quizNumber];
-
-                if (correctAnswer == true) {
-                  print('user got it right!');
-                } else {
-                  print('user got it wrong!');
-                }
-
+                bool correctAnswer = quizBrain.getQuestionAnswer();
+                quizBrain.nextQuestion();
                 setState(() {
                   judge.add(
                     Icon(
@@ -120,7 +77,6 @@ class _QuizPageState extends State<QuizPage> {
                       color: Colors.green,
                     ),
                   );
-                  quizNumber++;
                 });
               },
             ),
@@ -139,14 +95,8 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
               onPressed: () {
-                bool correctAnswer = answer[quizNumber];
-
-                if (correctAnswer == false) {
-                  print('user got it right!');
-                } else {
-                  print('user got it wrong!');
-                }
-
+                bool correctAnswer = quizBrain.getQuestionAnswer();
+                quizBrain.nextQuestion();
                 setState(() {
                   judge.add(
                     Icon(
@@ -154,7 +104,6 @@ class _QuizPageState extends State<QuizPage> {
                       color: Colors.red,
                     ),
                   );
-                  quizNumber++;
                 });
               },
             ),
@@ -167,7 +116,3 @@ class _QuizPageState extends State<QuizPage> {
     );
   }
 }
-
-/*
-
-*/
