@@ -32,9 +32,15 @@ class QuizBrain {
         true),
   ];
 
-  void nextQuestion() {
+  bool nextQuestion() {
     if (_quizNumber < _questions.length - 1) {
       _quizNumber++;
+      print('true');
+      return true;
+    } else if (_quizNumber == _questions.length - 1) {
+      print('false');
+      _quizNumber = 0;
+      return false;
     }
   }
 

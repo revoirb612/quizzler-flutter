@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'quiz_brain.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 QuizBrain quizBrain = QuizBrain();
 
@@ -49,7 +50,10 @@ class _QuizPageState extends State<QuizPage> {
           ),
         );
       }
-    quizBrain.nextQuestion();
+    if (quizBrain.nextQuestion() == false) {
+      Alert(context: context, title: 'You\'ve reached to the end').show();
+      judge.clear();
+    }
     });
   }
 
